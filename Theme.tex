@@ -1,0 +1,184 @@
+% Style file to create my own beamer theme
+
+\usepackage[absolute,overlay]{textpos}
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{tikz,pgfplots}
+\usepackage{pgfpages,lipsum}
+\usepackage[pages=some]{background}
+\usetikzlibrary{shapes, snakes, arrows}
+\usepackage{xcolor}
+% Set spacing
+\setlength{\parskip}{10pt plus 1pt minus 1pt}
+
+% Multiple audiences presentation mode
+\usepackage{multiaudience}
+
+% Declare all possible audience groups
+\SetNewAudience{All}
+\SetNewAudience{OnlyMe}
+
+\DefCurrentAudience{All}
+
+%%% Defining the preamble
+\mode
+
+%%% Defining inner theme
+% Here we am using the rounded theme for the overall “feel” of the presentation
+\useinnertheme{rounded}
+
+% Instead of rounded circles, we will use triangles as the indicator for items.
+\setbeamertemplate{itemize items}[triangle]
+
+% The default option for enumerate environment removes the circles around the numbers provided by the “rounded” inner theme. Just simple numbers remain.
+%\setbeamertemplate{enumerate items}[default]
+
+%%% Defining colors
+% SU palette colors
+\definecolor{Darkblue}{RGB}{0, 47, 95}
+\definecolor{Eld}{RGB}{235, 113, 37}
+\definecolor{Oliv}{RGB}{163, 168, 107}
+\definecolor{Vatten}{RGB}{155, 178, 206}
+\definecolor{Himmel}{RGB}{61, 216, 224}
+\definecolor{White}{RGB}{255, 255, 255}
+
+% Self define colors
+\definecolor{AlertRed}{RGB}{220, 85, 95}
+\definecolor{Teal}{RGB}{87, 176, 181}
+
+
+% Colors for constituents
+\definecolor{Text1}{RGB}{0, 0, 0}
+\definecolor{Descitem}{RGB}{55, 100, 137}
+
+% Defining colors for blocks
+\definecolor{StdTitle}{RGB}{255, 160, 0}
+\definecolor{StdBody}{RGB}{255, 160, 0}
+
+\definecolor{AlTitle}{RGB}{220, 85, 95}
+\definecolor{AlBody}{RGB}{220, 85, 95}
+
+\definecolor{ExTitle}{RGB}{87, 176, 181}
+\definecolor{ExBody}{RGB}{87, 176, 181}
+
+% Assign colours to different constituents of the presentation
+\setbeamercolor{frametitle}{fg = Darkblue}
+\setbeamercolor{title}{fg = Darkblue}
+\setbeamercolor{normal text}{fg = Text1}
+
+% In case you choose to display the Table of Contents, or the Outline slide.
+\setbeamercolor{section in toc}{fg = Text1}
+\setbeamercolor{section in toc shaded}{fg = Text1}
+
+% The colour of all the items, subitems and and subsubitems are set to black.
+\setbeamercolor{item}{fg = Darkblue}
+\setbeamercolor{subitem}{fg = Darkblue}
+\setbeamercolor{subsubitem}{fg = Darkblue}
+
+\setbeamertemplate{itemize item}[\textbullet]
+\setbeamertemplate{itemize subitem}[\textasteriskcentered]
+\setbeamertemplate{itemize subsubitem}[circle]
+% This sets the color for each item heading of the description environment.
+\setbeamercolor{description item}{fg = Descitem}
+
+% We also need to fix the colours for captions for figures and tables.
+\setbeamercolor{caption}{fg = Ftitle}
+\setbeamercolor{caption name}{fg = Ftitle}
+
+% In addition, we can also change the background colour of the slides depending on pur requirement.
+% \setbeamercolor{background canvas}{bg = blue!5}
+
+% We will customize all these blocks based on our requirements
+
+% Standard block
+
+\setbeamercolor{block title}{fg = White, bg = StdTitle}
+\setbeamercolor{block body}{bg = StdBody!15!White}
+\AtBeginEnvironment{block}{%
+    \setbeamercolor{itemize item}{fg=StdTitle}
+    \setbeamercolor{itemize subitem}{fg=StdTitle}
+    \setbeamercolor{itemize subsubitem}{fg=StdTitle}
+    \setbeamercolor{enumerate item}{fg=StdTitle, bg=White}
+    \setbeamercolor{enumerate subitem}{fg=StdTitle}
+    \setbeamercolor{enumerate subsubitem}{fg=StdTitle}
+    \setbeamercolor{item projected}{fg=white, bg=StdTitle}
+}
+
+% Alert block
+
+\setbeamercolor{block title alerted}{fg = White, bg = AlTitle}
+\setbeamercolor{block body alerted}{bg = AlBody!15!White}
+\AtBeginEnvironment{alertblock}{%
+    \setbeamercolor{itemize item}{fg=AlTitle}
+    \setbeamercolor{itemize subitem}{fg=AlTitle}
+    \setbeamercolor{itemize subsubitem}{fg=AlTitle}
+    \setbeamercolor{enumerate item}{fg=AlTitle, bg=White}
+    \setbeamercolor{enumerate subitem}{fg=AlTitle}
+    \setbeamercolor{enumerate subsubitem}{fg=AlTitle}
+    \setbeamercolor{item projected}{fg=White, bg=AlTitle}
+}
+
+% Example block
+
+\setbeamercolor{block title example}{fg = White, bg = ExTitle}
+\setbeamercolor{block body example}{bg = ExBody!15!White}
+
+\AtBeginEnvironment{exampleblock}{%
+    \setbeamercolor{itemize item}{fg=ExTitle}
+    \setbeamercolor{itemize subitem}{fg=ExTitle}
+    \setbeamercolor{itemize subsubitem}{fg=ExTitle}
+    \setbeamercolor{enumerate item}{fg=ExTitle, bg=White}
+    \setbeamercolor{enumerate subitem}{fg=ExTitle}
+    \setbeamercolor{enumerate subsubitem}{fg=ExTitle}
+    \setbeamercolor{item projected}{fg=white, bg=ExTitle}
+}
+
+%%% Shortcut for creating each slide
+\newcommand{\mframe}[3][All]{
+\begin{shownto}{#1}
+    \begin{frame}
+        \begin{textblock}{3}(14.5,0.5)
+            \begin{tikzpicture}[x=1mm,y=1mm]
+        	 \foreach \x in {0,1,...,\inserttotalframenumber-1} 
+        	 					\draw [gray!30,very thick,cap=round] (90-\x/\inserttotalframenumber*360:2.5) -- (90-\x/\inserttotalframenumber*360:3.5);
+           \foreach \x in {0,...,\insertframenumber-1} 
+           					\draw[Darkblue,very thick,cap=round] (90-\x/\inserttotalframenumber*360:2.5) -- (90-\x/\inserttotalframenumber*360:3.5);
+           \node at (0,0) [] {\tiny{\textbf{\insertframenumber}}};
+        	\end{tikzpicture}
+        \end{textblock}
+        
+        % In case you need to move the logo to up right
+        %\begin{textblock}{3}(13,0.5)		
+        %\centering
+        %\includegraphics[0.5\textwidth]{SUlogo.jpg}
+        %\end{textblock}
+        \frametitle{#2}
+        #3
+    \end{frame}
+\end{shownto}
+}
+
+%%% Set font theme
+% Here we are using default fonts
+\usefonttheme{serif}
+
+% Font for the presentation title
+\setbeamerfont{title}{size = \Large}
+\setbeamerfont{subtitle}{size = \huge}
+
+% Font of the frame titles
+\setbeamerfont{frametitle}{size = \Large}
+
+% Font for other title page information
+\setbeamerfont{author}{size = \large}
+\setbeamerfont{date}{size = \normalsize,}
+\setbeamerfont{institute}{size = \normalsize,}
+
+%%% Defining outer theme
+% remove the navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Organize the presentation title and the frame titles
+
+% Effects setting
+\setbeamercovered{transparent}

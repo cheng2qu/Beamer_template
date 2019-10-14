@@ -1,0 +1,373 @@
+\documentclass[aspectratio=43,xcolor=table]{beamer}
+\usepackage[utf8]{inputenc}
+
+% Special symbol
+\usepackage{keystroke} % Keyboard
+\usepackage{fontawesome} % Internet emoji
+\usepackage{tikzsymbols} 
+\usepackage{textcomp} % Arrows in text mode
+
+% Font family
+\usepackage{palatino}
+
+% Tables
+\usepackage[table,xcdraw]{xcolor}
+\arrayrulecolor{White}
+
+% Import theme
+\input{Theme.tex}
+
+% Information in the title page
+\title{Empirical Finance, Fall 2019}
+\subtitle {Computer Exercise 1}
+\author{Chengcheng Qu}
+\date{\today}
+\logo{\includegraphics[0.75\textwidth]{SUlogo.jpg}}
+\institute{Stockholm Business School}
+ 
+ % New command for boxed text
+ \newcommand{\key}[1]{\fbox{\textbf{#1}}}
+
+\begin{document}
+ 
+\begin{frame}[noframenumbering]
+\begin{tikzpicture}[remember picture, overlay]
+      \node[anchor = north west, opacity = 0.15] at (-1.75,1) {
+      \pgfimage[width=\textwidth]{Olive.jpg}};
+\end{tikzpicture}
+\titlepage 
+\end{frame}
+
+\mframe{Excel: Advantages \& Limits}{
+Excel is straightforward and multifunctional. The user can view, edit, visualize, and analyze data (numeric, text, date, logical value) directly and spontaneously.
+\pause
+
+But it can be painful when \vspace{-10pt}
+\begin{itemize}
+	\item[\Walley] a large data crashes Excel \pause
+	\item[\Walley] an accidental change happens but Excel can't undo it \pause
+	\item[\Walley] an analysis contains many steps
+\end{itemize}
+\pause
+
+Some companies are switching from Excel to SQL, business intelligence tools, or other programming languages
+}
+
+\mframe{Outline}{
+
+\begin{itemize}
+\setlength\itemsep{1em}
+	\item Excel function: always starts with \key{=} \pause
+	
+	\item Absolute vs. relative reference: 
+	
+	switch among \textcolor{Darkblue}{A1},  \textcolor{Darkblue}{\$A\$1},  \textcolor{Darkblue}{A\$1},  \textcolor{Darkblue}{\$A1} with \key{F4} 
+	\pause
+	
+    \item Name manager \key{Ctrl} + \key{F3}
+    \pause
+    
+    \item Matrix calculation in Excel:
+	
+	use \key{Ctrl} + \key{Shift} + \key{Enter}
+    
+\end{itemize}
+}
+
+\mframe{Introduction to Functions}{
+
+\textcolor{Eld}{\faLightbulbO} Let Excel know it is a function with \key{=} \vspace{-10pt}
+\pause
+
+\textcolor{Eld}{\faLightbulbO} Excel function name is not case-sensitive
+\pause
+
+PI(): Returns the value of $\pi$
+
+ABS(x): Returns the absolute value of x \vspace{-10pt}
+
+SQRT(x): Returns the square root of x
+\pause
+
+\begin{examples}
+\begin{itemize}
+    \item[\textbullet] =PI()  \Return or =pi()  \Return obtains 3.141593
+    \item[\textbullet] Given \textcolor{ExTitle}{A1}=4, =SQRT(\textcolor{ExTitle}{A1}) \Return obtains 2
+    \item[\textbullet] Given \textcolor{ExTitle}{A1}=-4, =SQRT(\textcolor{ExTitle}{A1}) \Return obtains 
+\textcolor{AlTitle}{\#NUM!}
+\end{itemize}
+\end{examples}
+}
+
+\mframe{Introduction to Functions (cont.)}{
+LOG(x, base): Returns the logarithm of x to a given base \vspace{-10pt}
+\pause
+
+LN(x): Returns the natural logarithm of x \vspace{-10pt}
+\pause
+
+POWER(x, power) and EXP(x) are the exponential functions 
+
+\pause
+\textcolor{Eld}{\faLightbulbO} Function separator could be ``;" instead of ``,"
+\pause
+
+\begin{block}{Shortcut}
+\begin{itemize}
+    \item[\textbullet] Fill in along column(row) with fill handle \textbf{+}
+    \item[\textbullet] Use absolute reference \textcolor{Eld}{\$} so the value doesn't "move"
+\end{itemize}
+\end{block}
+
+\pause
+
+\textcolor{Eld}{\faLightbulbO} The argument x can also be numbers, arrays, or names 
+
+SUM(x): Sum up of values in x  \vspace{-10pt}
+}
+
+\mframe{Data Analysis and Statistics}{
+Functions connect analysis results with data dynamically
+
+AVERAGE(x): Returns the average of values in x \vspace{-10pt}
+
+STDEV.P(x) or STDEV.S(x): Returns the population (or sample) standard deviation of values in x \vspace{-10pt}
+
+MIN(x): Returns the minimum value of values in x  \vspace{-10pt}
+
+MAX(x): Returns the maximum value of values in x  
+
+NORM.DIST(x, $\mu$, $\sigma$, Cumulative): \vspace{-10pt}
+
+If Cumulative is \textcolor{ExTitle}{TRUE} returns cumulative distribution function; if \textcolor{ExTitle}{FALSE} returns probability mass function \vspace{-10pt}
+
+NORM.INV(Prob, $\mu$, $\sigma$): \vspace{-10pt}
+
+Returns the inverse of the normal cumulative distribution
+
+INTERCEPT(y, x): returns the intercept of a regression \vspace{-10pt}
+
+SLOPE (y, x): returns the slope of a regression
+
+}
+
+\mframe{Data Analysis and Statistics (cont.)}{
+
+An alternative way to do statistic analysis is Data Analysis Add-in
+
+File \textrightarrow Options \textrightarrow Add-Ins \textrightarrow Analysis ToolPak \textrightarrow \key{Go}
+\textrightarrow Data Analysis Add-in on Toolbar
+
+We will come back to this part in following seminars
+}
+
+\mframe{Names}{
+An index like \textcolor{Darkblue}{A1:Z100} can be annoying to select and track...
+
+Instead we can use a \textcolor{Darkblue}{NAME} for \textcolor{Darkblue}{A1:Z100}. 
+To define, view, and edit names: \vspace{-10pt}
+
+Formulas \textrightarrow Name Manager
+
+\begin{block}{Shortcut}
+\begin{itemize}
+    \item[\textbullet] Select a region then right-click to define a name
+    \item[\textbullet] Open Name Manager with with \key{Ctrl} + \key{F3}
+    \item[\textbullet] Name Box at top left corner (below "File")
+\end{itemize}
+\end{block}
+
+However, the name is a reference to cells. In case we change the rows (columns) in our data we need to update the name.
+}
+
+\mframe{Matrix Calculation Functions}{
+\begin{table}[]
+\begin{tabular}{ll}
+\rowcolor{Teal} 
+{\color{White} Values in spreadsheet}& {\color{White} Values in matrix} \\
+A cell &  A scalar\\
+A column & A column vector \\
+A row & A row vector \\
+An array of $r$ rows and $c$ columns &  A $r \times c$ matrix
+\end{tabular}
+\end{table}
+
+\begin{alertblock}{When dealing with matrices, Excel requires:}
+\begin{itemize}
+    \item[\textbullet] An array to store the results
+    \item[\textbullet] \key{Ctrl} + \key{Shift} + \key{Enter}
+\end{itemize}
+\end{alertblock}
+}
+
+\mframe{Matrix Addition and Subtraction}{
+Example from Lecture 1 handout p.50
+$$A = \begin{pmatrix}
+ 0.3 & 0.6 \\
+−0.1 & 0.7 \\
+\end{pmatrix},
+B = \begin{pmatrix}
+0.2 & −0.1\\
+0 & 0.3\\
+\end{pmatrix}$$
+$$A + B = \begin{pmatrix}
+0.3 + 0.2 & 0.6 + 0.1 \\
+−0.1 + 0 & 0.7 + 0.3\\
+\end{pmatrix} = 
+\begin{pmatrix}
+0.5 &0.5 \\
+−0.1& 1.0\\
+\end{pmatrix}$$
+$$A - B = \begin{pmatrix}
+0.3 - 0.2 & 0.6 - 0.1 \\
+−0.1 - 0 & 0.7 - 0.3\\
+\end{pmatrix} = 
+\begin{pmatrix}
+0.1 & 0.7 \\
+−0.1 & 0.4 \\
+\end{pmatrix}$$
+\begin{exampleblock}{Operation in Excel}
+\key{+} and \key{-} do the same, but you need store the results in arrays and use combination of \key{Ctrl} + \key{Shift} + \key{Enter}
+\end{exampleblock}
+}
+
+\mframe{Matrix Multiplication}{
+Matrix multiplied by a scalar, e.g. p.51
+$$A = \begin{pmatrix}
+0.3 & 0.6 \\
+−0.1 & 0.7 \\
+\end{pmatrix}$$
+$$2A = \begin{pmatrix}
+2 \times 0.3 & 2 \times0.6 \\
+2 \times−0.1 & 2 \times0.7 \\
+\end{pmatrix} =
+\begin{pmatrix}
+0.6 & 1.2\\
+−0.2 & 1.4 \\
+\end{pmatrix}$$
+
+\begin{exampleblock}{Operation in Excel}
+\key{*} does the same, but you need store the results in arrays and use combination of \key{Ctrl} + \key{Shift} + \key{Enter}
+\end{exampleblock}
+}
+
+\mframe{Matrix Multiplication}{
+Matrix multiplied by a matrix, e.g. p.53
+$$A_{2 \times 3} = \begin{pmatrix}
+1 &2 &3 \\
+2 &1 &2 \\
+\end{pmatrix},
+B_{3 \times 2} = \begin{pmatrix}
+1 &2\\
+3 &6\\
+2 &2\\
+\end{pmatrix}$$
+\begin{aligned}
+A_{2 \times 3} \times B_{3 \times 2} &= 
+\begin{pmatrix}
+1\times1 + 2\times3 + 3\times2 &1\times2 + 2\times6 + 3\times2 \\
+2\times1 + 1\times3 + 2\times2 &2\times2 + 1\times6 + 2\times2 \\
+\end{pmatrix}\\
+&=
+\begin{pmatrix}
+13&	20\\
+9&	14 \\
+\end{pmatrix}
+\end{aligned}
+
+\begin{alertblock}{Remark}
+The number of columns in $\mathbf{X}$ equals the number of rows $\mathbf{Y}$.
+\end{alertblock}
+
+\begin{exampleblock}{Operation in Excel}
+ MMULT(X,Y) for $\mathbf{X_{m \times k}} \times \mathbf{Y_{k \times n}}$
+\end{exampleblock}
+}
+
+\mframe{Matrix Inverse}{
+ Matrix multiplication is not commutive in general: \vspace{-10pt}
+$$AB \neq BA$$
+ For this reason, we define inverse  \vspace{-10pt}
+ $$A A^{-1} = I = A^{-1}A $$ to distinguish $ABA^{-1}$ (``division from left" ) and $A^{-1}AB = B$ (``division from left" )
+
+ $A^{-1}$ is obtained from solving equation $ Ax = I$
+ 
+ \begin{block}{Shortcut}
+ For a $2 \times 2$ matrix $X=
+     \begin{pmatrix}
+     a & b\\
+     c & d \\
+     \end{pmatrix}$, X^{-1}= \dfrac{1}{ad-bc} \begin{pmatrix}
+     d & −b \\
+     −c & a \\
+     \end{pmatrix}
+ \end{block}
+
+}
+
+\mframe{Matrix Inverse (cont.)}{
+\begin{alertblock}{Remark}
+ $\mathbf{X}$ should be a square and full-rank matrix to be invertible.
+\end{alertblock}
+\begin{exampleblock}{Operation in Excel}
+ MINVERSE(X) for $\mathbf{X^{-1}_{n \times n}}$
+ \end{exampleblock}
+}
+
+\mframe{Matrix Transpose}{
+ Matrix transpose, e.g. p.55
+ $$A = \begin{pmatrix}
+1 &2\\
+7 &3\\
+1 &6\\
+\end{pmatrix}, \ A' = \begin{pmatrix}
+1 &7 &1\\
+2 &3 &6\\
+\end{pmatrix}$$
+$A$ is a $3 \times 2$ matrix and $A'$ is a $2 \times 3$ matrix
+
+\begin{exampleblock}{Operation in Excel}
+TRANSPOSE(X) for $\mathbf{X^{'}_{n \times k}}$
+\end{exampleblock}
+}
+
+
+\mframe[OnlyMe]{Double Column}{
+\begin{columns}
+\column{0.5\textwidth}
+This is a text in first column.
+$$E=mc^2$$
+\begin{itemize}
+\item First item
+\item Second item
+\end{itemize}
+ 
+\column{0.5\textwidth}
+This text will be in the second column
+and on a second tought this is a nice looking
+layout in some cases.
+\end{columns}
+}
+
+
+\mframe[OnlyMe]{Blocks}{
+
+In this slide, some important text will be
+\alert{highlighted} because it's important.
+Please, don't abuse it.
+ 
+\begin{block}{Remark}
+Sample text
+\end{block}
+ 
+\begin{alertblock}{Important theorem}
+Sample text in red box
+\end{alertblock}
+ 
+\begin{examples}
+Sample text in green box. The title of the block is ``Examples".
+\end{examples}
+}
+
+
+\end{document}
